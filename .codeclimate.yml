@@ -1,0 +1,14 @@
+engines:
+  bundler-audit:
+    enabled: true
+  rubocop:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        ruby: true
+
+ratings:
+  paths:
+  - "**.rb"
