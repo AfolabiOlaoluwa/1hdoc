@@ -1,9 +1,7 @@
-require 'yaml'
 require_relative 'spec_helper'
 require_relative '../lib/1hdoc/log_builder'
 
 describe HDOC::LogBuilder do
-  $PROGRAM_NAME = __FILE__
   subject { described_class.new('./fixtures/log_example.yaml') }
 
   before do
@@ -20,7 +18,7 @@ describe HDOC::LogBuilder do
   end
 
   it 'should write the edits on file' do
-    filename = File.expand_path('fixtures/log_example_2.yaml', File.dirname($PROGRAM_NAME))
+    filename = expand_path('fixtures/log_example_2.yaml')
     log = described_class.new(filename)
 
     log.add(day: 2, progress: 'Fixed CSS', thoughts: '--', links: {})
@@ -35,12 +33,12 @@ describe HDOC::LogBuilder do
   end
 
   it 'should raise an error if log file is not found' do
-    expected_error = HDOC::LogBuilder::LogNotFound
+    expected_error = HDOC::Utilities::LogNotFound
     expect { described_class.new('u2/log.yaml') }.to raise_error(expected_error)
   end
 
   it 'should raise an error if day is not found' do
-    expected_error = HDOC::LogBuilder::DayNotFound
+    expected_error = HDOC::Utilities::DayNotFound
     expect { subject.edit(21, progress: 'None') }.to raise_error(expected_error)
   end
 end

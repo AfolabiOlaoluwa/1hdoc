@@ -1,15 +1,16 @@
 module HDOC
-  # Manage user's log by adding or editing elements.
+  ##
+  # Manage user's log providing methods for:
+  #   - add a record to the log
+  #   - add an existing record
+  #   - translate the log's hash in YAML
   class LogBuilder
     attr_reader :log
+    include Utilities
 
-    LogNotFound = Class.new(RuntimeError)
-    DayNotFound = Class.new(RuntimeError)
-
-    def initialize(path, log_parser = YAML)
+    def initialize(path, file_parser = YAML)
       @path = File.expand_path(path, File.dirname($PROGRAM_NAME))
-      @log_parser = log_parser
-      @log = retrieve_log
+      @log = retrieve_log(@path, file_parser)
     end
 
     def add(**data)
@@ -24,25 +25,6 @@ module HDOC
     def edit(day, **data)
       raise DayNotFound, "Unable to find 'Day #{day}'" unless @log[day]
       @log[day].merge!(stringify_symbols(data))
-    end
-
-    private
-
-    def retrieve_log
-      raise LogNotFound, "Unable to find #{@path}" unless File.exist?(@path)
-      @log_parser.load_file(@path) || {}
-    end
-
-    # Transform symbol's keys in string ones.
-    def stringify_symbols(hash_object)
-      keys = hash_object.keys
-
-      0.upto(keys.length) do |pos|
-        next unless keys[pos].is_a?(Symbol)
-        hash_object[keys[pos].to_s] = hash_object.delete(keys[pos])
-      end
-
-      hash_object
     end
   end
 end
