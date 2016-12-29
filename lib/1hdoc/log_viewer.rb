@@ -1,4 +1,5 @@
 module HDOC
+  ##
   # Show the user's log in a human-readable way.
   class LogViewer
     include Utilities
@@ -8,8 +9,6 @@ module HDOC
       @log = retrieve_log(@path, file_parser)
     end
 
-    ##
-    # Show the entire log or the specific for a day.
     def show(log_day = nil)
       result = ''
 
@@ -26,6 +25,19 @@ module HDOC
 
     private
 
+    ##
+    # Format log's data in order to get something like:
+    #   ```
+    #   - Day 1 -
+    #     ** Progress **
+    #     Fixed CSS, worked on canvas functionality for the app.
+    #
+    #     ** Thoughts **
+    #     I really struggled with CSS.
+    #
+    #     ** Links **
+    #     Calculator App: http://www.example.com/
+    #   ```
     def format_log(day, data, links)
       %(
         |- Day #{day} -
