@@ -6,18 +6,41 @@ describe HDOC::LogBuilder do
   $PROGRAM_NAME = __FILE__
   subject { described_class.new('./fixtures/log_example.yaml') }
 
-  it 'should add a new record to the log' do
+  before do
     subject.add(day: 2, progress: 'Fixed CSS', thoughts: '--', links: {})
+  end
+
+  it 'should add a new record to the log' do
     expect(subject.log[2]).not_to be_nil
   end
 
+  it 'should edit a record' do
+    subject.edit(2, progress: 'Fixed CSS.')
+    expect(subject.log[2]['progress']).to eq('Fixed CSS.')
+  end
+
+  it 'should write the edits on file' do
+    filename = File.expand_path('fixtures/log_example_2.yaml', File.dirname($PROGRAM_NAME))
+    log = described_class.new(filename)
+
+    log.add(day: 2, progress: 'Fixed CSS', thoughts: '--', links: {})
+    log.build
+
+    expect(File.read(filename)).to include('Fixed CSS')
+    File.open(filename, 'w') { |file| file.puts '---' }
+  end
+
   it 'should transform symbols keys to string ones' do
-    subject.add(day: 3, progress: 'Fixed CSS', thoughts: '--', links: {})
-    expect(subject.log[3]['progress']).to eq('Fixed CSS')
+    expect(subject.log[2]['progress']).to eq('Fixed CSS')
   end
 
   it 'should raise an error if log file is not found' do
     expected_error = HDOC::LogBuilder::LogNotFound
     expect { described_class.new('u2/log.yaml') }.to raise_error(expected_error)
+  end
+
+  it 'should raise an error if day is not found' do
+    expected_error = HDOC::LogBuilder::DayNotFound
+    expect { subject.edit(21, progress: 'None') }.to raise_error(expected_error)
   end
 end

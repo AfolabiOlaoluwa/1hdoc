@@ -4,6 +4,7 @@ module HDOC
     attr_reader :log
 
     LogNotFound = Class.new(RuntimeError)
+    DayNotFound = Class.new(RuntimeError)
 
     def initialize(path, log_parser = YAML)
       @path = File.expand_path(path, File.dirname($PROGRAM_NAME))
@@ -16,11 +17,20 @@ module HDOC
       @log[day] = stringify_symbols(data)
     end
 
+    def build
+      File.open(@path, 'w') { |file| file.puts @log.to_yaml }
+    end
+
+    def edit(day, **data)
+      raise DayNotFound, "Unable to find 'Day #{day}'" unless @log[day]
+      @log[day].merge!(stringify_symbols(data))
+    end
+
     private
 
     def retrieve_log
       raise LogNotFound, "Unable to find #{@path}" unless File.exist?(@path)
-      @log_parser.load_file(@path)
+      @log_parser.load_file(@path) || {}
     end
 
     # Transform symbol's keys in string ones.
