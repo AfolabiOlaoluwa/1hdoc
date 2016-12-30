@@ -2,49 +2,24 @@ require_relative 'spec_helper'
 require_relative '../lib/1hdoc/log_builder'
 
 describe HDOC::LogBuilder do
-  subject { described_class.new('./fixtures/log_example.yaml') }
-
   before do
-    subject.add(day: 2, progress: 'Fixed CSS', thoughts: '--', links: {})
-  end
-
-  it 'should raise an error if log file is not found' do
-    expected_error = HDOC::Utilities::LogNotFound
-    expect { described_class.new('u2/log.yaml') }.to raise_error(expected_error)
+    @log_path = './fixtures/log_example_2.yaml'
+    @log = described_class.new(@log_path)
   end
 
   context '#add' do
     it 'should add a new record to the log' do
-      expect(subject.log[2]).not_to be_nil
+      @log.add(progress: 'Fixed CSS.', thoughts: 'I love Sass', links: {})
+      expect(read_file(@log_path)).to include('I love Sass')
     end
 
-    it 'should transform symbols keys to string ones' do
-      expect(subject.log[2]['progress']).to eq('Fixed CSS')
-    end
-  end
-
-  context '#edit' do
-    it 'should edit a record' do
-      subject.edit(2, progress: 'Fixed CSS.')
-      expect(subject.log[2]['progress']).to eq('Fixed CSS.')
+    it 'should return false because there is already a record' do
+      expect(@log.add(progress: 'Fixed CSS.')).to eq(false)
     end
 
-    it 'should raise an error if day is not found' do
-      expected_error = HDOC::Utilities::DayNotFound
-      expect { subject.edit(21, progress: 'None') }.to raise_error(expected_error)
-    end
-  end
-
-  context '#build' do
-    it 'should write the edits on file' do
-      filename = expand_path('fixtures/log_example_2.yaml')
-      log = described_class.new(filename)
-
-      log.add(day: 2, progress: 'Fixed CSS', thoughts: '--', links: {})
-      log.build
-
-      expect(File.read(filename)).to include('Fixed CSS')
-      File.open(filename, 'w') { |file| file.puts '---' }
+    it 'should numbering the days' do
+      expect(read_file(@log_path)).to include('1')
+      File.write(expand_path(@log_path), '')
     end
   end
 end

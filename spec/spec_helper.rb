@@ -8,4 +8,8 @@ RSpec.configure do
   def expand_path(path)
     File.expand_path(path, File.dirname($PROGRAM_NAME))
   end
+
+  def read_file(path)
+    File.read(expand_path(path))
+  end
 end
