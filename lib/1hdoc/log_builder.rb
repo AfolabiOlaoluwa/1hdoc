@@ -33,7 +33,7 @@ module HDOC
     end
 
     def build
-      File.open(@path, 'a') { |file| file.puts @record.to_yaml }
+      File.open(@path, 'a') { |file| file.puts @record.to_yaml.sub('---', '') }
     end
 
     def fetch_next_day
