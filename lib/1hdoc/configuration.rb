@@ -10,6 +10,7 @@ module HDOC
       @config_parser = config_parser
 
       @options = parse_configuration
+      sanitize_options
     end
 
     private
@@ -17,6 +18,10 @@ module HDOC
     def parse_configuration
       raise FileNotFound, "Unable to find #{@path}" unless File.exist?(@path)
       @config_parser.load_file(@path) || {}
+    end
+
+    def sanitize_options
+      @options.each { |key, value| @options[key] = '' if value.nil? }
     end
   end
 end
