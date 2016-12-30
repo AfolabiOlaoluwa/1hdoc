@@ -1,6 +1,3 @@
-#!/usr/bin/env ruby
-# coding: utf-8
-
 # stdlib
 require 'yaml'
 
