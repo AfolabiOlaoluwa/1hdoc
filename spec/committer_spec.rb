@@ -5,7 +5,7 @@ require_relative '../lib/1hdoc/configuration'
 require_relative '../lib/1hdoc/committer'
 
 describe HDOC::Committer do
-  context '#initialize' do
+  context ' during initialization' do
     it 'should raise an error if unable to find the workspace' do
       workspace = '~/worksp4c3x1'
       expect { described_class.new(workspace) }.to raise_error(ArgumentError)

@@ -9,7 +9,7 @@ module HDOC
     ##
     # Initialize the workspace.
     def self.init(path, git = Git)
-      $stderr.puts 'Forking #100DaysOfCode repository..'
+      $stderr.puts 'Cloning #100DaysOfCode repository..'
       git.clone('https://github.com/Kallaway/100-days-of-code', path)
     end
 
