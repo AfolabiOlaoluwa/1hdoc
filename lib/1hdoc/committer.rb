@@ -8,20 +8,16 @@ module HDOC
 
     ##
     # Initialize the workspace.
-    def self.init(path, forked_repo_url, git = Git)
-      forked_repo = git.clone('https://github.com/Kallaway/100-days-of-code', path)
-      forked_repo.remote('origin').remove
-      forked_repo.add_remote('origin', forked_repo_url)
-
-      path
+    def self.init(path, git = Git)
+      $stderr.puts 'Forking #100DaysOfCode repository..'
+      git.clone('https://github.com/Kallaway/100-days-of-code', path)
     end
 
-    def initialize(path = '~/.1hdoc.yml', config_parser = Configuration, git = Git)
-      @path = File.expand_path(path, File.dirname($PROGRAM_NAME))
-      @config = config_parser.new(@path).options
+    def initialize(path, git = Git)
+      @path = path
       @git = git
 
-      check_for_workspace
+      check_for_valid_repo
     end
 
     def commit(message)
@@ -34,8 +30,11 @@ module HDOC
 
     private
 
-    def check_for_workspace
-      @git.open(@config['workspace'] || 'nil')
+    ##
+    # Check if the the given path corresponds to a valid repo.
+    # By default, Git.open should raises an error if the path isn't valid.
+    def check_for_valid_repo
+      @git.open(@path)
     end
   end
 end
