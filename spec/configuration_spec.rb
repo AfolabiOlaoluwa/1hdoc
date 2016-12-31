@@ -13,7 +13,7 @@ describe HDOC::Configuration do
 
   context ' during initialization' do
     it 'should raise an error because no file found' do
-      expected_error = described_class::FileNotFound
+      expected_error = Errno::ENOENT
       expect { described_class.new('./fixt2res') }.to raise_error(expected_error)
     end
   end

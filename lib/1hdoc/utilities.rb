@@ -2,13 +2,10 @@ module HDOC
   ##
   # Implements methods and constants used by many independents classes.
   module Utilities
-    LogNotFound = Class.new(RuntimeError)
-    DayNotFound = Class.new(RuntimeError)
-
     ##
     # Load log from a YAML file.
     def retrieve_log(path, file_parser)
-      raise LogNotFound, "Unable to find #{@path}" unless File.exist?(path)
+      raise Errno::ENOENT, "Unable to load #{@path}" unless File.exist?(path)
       file_parser.load_file(path) || {}
     end
 
@@ -18,8 +15,10 @@ module HDOC
       keys = hash_object.keys
 
       0.upto(keys.length) do |pos|
-        next unless keys[pos].is_a?(Symbol)
-        hash_object[keys[pos].to_s] = hash_object.delete(keys[pos])
+        target_key = keys[pos]
+
+        next unless target_key.is_a?(Symbol)
+        hash_object[target_key.to_s] = hash_object.delete(target_key)
       end
 
       hash_object

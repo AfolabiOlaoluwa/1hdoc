@@ -9,15 +9,14 @@ module HDOC
       @log = retrieve_log(@path, file_parser)
     end
 
-    def show(log_day = nil)
+    ##
+    # Show the entire log or filtered by day.
+    def show(target_day = 0)
       result = ''
 
       @log.each do |day, data|
-        # Check if the user asked for a specific day, so ignore the others.
-        next if !log_day.nil? && day != log_day
-
-        links = data['links'].map { |title, url| "#{title}: #{url}" }.join("\n  ")
-        result << format_log(day, data, links)
+        next if !target_day.zero? && day != target_day
+        result << format_log(day, data)
       end
 
       result
@@ -35,10 +34,9 @@ module HDOC
     #     ** Thoughts **
     #     I really struggled with CSS.
     #
-    #     ** Links **
-    #     Calculator App: http://www.example.com/
+    #     -- Link to work: http://www.example.com/
     #   ```
-    def format_log(day, data, links)
+    def format_log(day, data)
       %(
         |- Day #{day} -
         |
@@ -46,7 +44,7 @@ module HDOC
         |
         |  ** Thoughts ** \n  #{data['thoughts']}
         |
-        |  ** Links **    \n  #{links}
+        |  -- Link to work: #{data['link']}
       ).gsub(/ +\|/, '')
     end
   end

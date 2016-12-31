@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
 
   gem.homepage = 'https://github.com/domcorvasce/1hdoc'
   gem.license = 'GPL-3.0'
-  
+
   # Dependencies (production)
   gem.require_paths = ['lib']
   gem.required_ruby_version = '> 1.9'
@@ -20,16 +20,17 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rake', '~> 0'
   gem.add_development_dependency 'rdoc', '~> 0'
   gem.add_development_dependency 'rspec', '~> 3'
-  
+
   gem.extra_rdoc_files = ['README.md']
   gem.rdoc_options = ['--charset=UTF-8']
 
   gem.executables << '1hdoc'
   gem.files = [
-      'lib/1hdoc.rb',
-      'lib/1hdoc/utilities.rb',
-      'lib/1hdoc/configuration.rb',
-      'lib/1hdoc/log_builder.rb',
-      'lib/1hdoc/log_viewer.rb'
+    'lib/1hdoc.rb',
+    'lib/1hdoc/utilities.rb',
+    'lib/1hdoc/configuration.rb',
+    'lib/1hdoc/committer.rb',
+    'lib/1hdoc/log_builder.rb',
+    'lib/1hdoc/log_viewer.rb'
   ]
 end

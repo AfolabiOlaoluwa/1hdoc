@@ -17,7 +17,7 @@ describe HDOC::Committer do
       @repo_dir = expand_path('./fixtures/100-days-of-code')
     end
 
-    after  { FileUtils.remove_dir(@repo_dir) }
+    after { FileUtils.remove_dir(@repo_dir) }
 
     it 'should initialize the workspace' do
       described_class.init(@repo_dir)

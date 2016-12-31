@@ -4,7 +4,6 @@ module HDOC
   # It's based upon `git` gem.
   class Committer
     attr_reader :git
-    WorkspaceNotFound = Class.new(RuntimeError)
 
     ##
     # Initialize the workspace.

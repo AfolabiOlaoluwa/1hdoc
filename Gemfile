@@ -4,6 +4,6 @@ gem 'git'
 
 group :development do
   gem 'rake'
-  gem 'rspec'
   gem 'rdoc'
+  gem 'rspec'
 end

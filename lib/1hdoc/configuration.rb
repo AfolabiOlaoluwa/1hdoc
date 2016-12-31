@@ -3,11 +3,11 @@ module HDOC
   # Manage configuration files.
   class Configuration
     attr_reader :options
-    FileNotFound = Class.new(RuntimeError)
+
     OPTIONS = {
-        'workspace' => '~/Workspace/my_repo',
-        'auto_push' => true
-    }
+      'workspace' => '~/Workspace/my_repo',
+      'auto_push' => true
+    }.freeze
 
     ##
     # Initialize a configuration file.
@@ -26,7 +26,7 @@ module HDOC
     private
 
     def parse_configuration
-      raise FileNotFound, "Unable to find #{@path}" unless File.exist?(@path)
+      raise Errno::ENOENT, "Unable to find #{@path}" unless File.exist?(@path)
       @config_parser.load_file(@path) || {}
     end
 
