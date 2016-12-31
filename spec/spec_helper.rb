@@ -1,5 +1,6 @@
 require 'rspec'
 require 'yaml'
+require 'fileutils'
 require_relative '../lib/1hdoc/utilities'
 
 RSpec.configure do

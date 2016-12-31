@@ -11,9 +11,20 @@ describe HDOC::Configuration do
     expect(@config.options['workspace']).to eq('~/workspace')
   end
 
-  context '#'
-  it 'should raise an error because no file found' do
-    expected_error = described_class::FileNotFound
-    expect { described_class.new('./fixt2res') }.to raise_error(expected_error)
+  context ' during initialization' do
+    it 'should raise an error because no file found' do
+      expected_error = described_class::FileNotFound
+      expect { described_class.new('./fixt2res') }.to raise_error(expected_error)
+    end
+  end
+
+  context '.init' do
+    before { @config_path = expand_path('./fixtures/config_example_2.yaml') }
+    after { File.delete(@config_path) }
+
+    it 'should initialize a new configuration file' do
+      described_class.init(@config_path)
+      expect(File.exist?(@config_path)).to eq(true)
+    end
   end
 end
