@@ -25,7 +25,7 @@ gem install *.gem
 
 ## Getting Started
 
-#### Configure the necessary
+### Configure the necessary
 
 Here we are! Now you've to initialize all necessary files which are:
   
@@ -38,7 +38,7 @@ Open your Terminal and type:
 1hdoc init
 ```
 
-#### Change repo's remote origin
+### Change repo's remote origin
 
 A final thing, you should edit the repo's remote origin so I can 
 push to your account.
@@ -54,7 +54,7 @@ git remote add origin YOUR_REPO_URL
 
 Hooray! We're done.
 
-#### Register your progress
+### Register your progress
 
 Have you ended Day 2? 
 
@@ -83,7 +83,7 @@ If you turn off `auto_push` you can push to the repo typing:
 1hdoc sync
 ```
 
-#### See progress
+### See progress
 
 Obviously you can see your progress:
 
