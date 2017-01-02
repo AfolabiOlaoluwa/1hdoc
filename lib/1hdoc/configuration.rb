@@ -4,15 +4,14 @@ module HDOC
   class Configuration
     attr_reader :options
 
-    OPTIONS = {
-      'workspace' => '~/Workspace/my_repo',
-      'auto_push' => true
-    }.freeze
-
     ##
     # Initialize a configuration file.
-    def self.init(path)
-      File.open(path, 'w') { |file| file.puts(OPTIONS.to_yaml) }
+    def self.init(path, workspace='~/Workspace/')
+      @options =  {
+          'workspace' => workspace,
+          'auto_push' => true
+      }.freeze
+      File.open(File.expand_path(path), 'w') { |file| file.puts(@options.to_yaml) }
     end
 
     def initialize(path, config_parser = YAML)
