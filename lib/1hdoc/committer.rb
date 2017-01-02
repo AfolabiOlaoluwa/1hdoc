@@ -11,7 +11,7 @@ module HDOC
       path = File.expand_path(path)
 
       $stderr.puts 'Cloning #100DaysOfCode repository..'
-      git.clone('https://github.com/Kallaway/100-days-of-code', path)
+      git.clone('https://github.com/domcorvasce/100-days-of-code', path)
     end
 
     def initialize(path, git = Git)
