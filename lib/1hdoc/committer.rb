@@ -16,9 +16,7 @@ module HDOC
 
     def initialize(path, git = Git)
       @path = path
-      @git = git
-
-      check_for_valid_repo
+      @repo = git.open(path)
     end
 
     def commit(message)
@@ -27,15 +25,6 @@ module HDOC
 
     def add
       @git.add(all: true)
-    end
-
-    private
-
-    ##
-    # Check if the the given path corresponds to a valid repo.
-    # By default, Git.open should raises an error if the path isn't valid.
-    def check_for_valid_repo
-      @git.open(@path)
     end
   end
 end
