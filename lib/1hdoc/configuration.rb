@@ -6,10 +6,10 @@ module HDOC
 
     ##
     # Initialize a configuration file.
-    def self.init(path, workspace='~/Workspace/')
-      @options =  {
-          'workspace' => workspace,
-          'auto_push' => true
+    def self.init(path, workspace = '~/Workspace/')
+      @options = {
+        'workspace' => workspace,
+        'auto_push' => true
       }.freeze
       File.open(File.expand_path(path), 'w') { |file| file.puts(@options.to_yaml) }
     end

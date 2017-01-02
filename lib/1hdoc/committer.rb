@@ -19,12 +19,10 @@ module HDOC
       @repo = git.open(path)
     end
 
-    def commit(message)
-      @repo.commit(message)
-    end
-
-    def add
+    def push(message)
       @repo.add(all: true)
+      @repo.commit(message)
+      @repo.push
     end
   end
 end

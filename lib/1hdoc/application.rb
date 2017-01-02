@@ -14,6 +14,8 @@ module HDOC
       @config_file = '~/.1hdoc.yml'
     end
 
+    ##
+    # Parse defined options.
     def run
       options = initialize_options
       options.parse!
@@ -33,6 +35,8 @@ module HDOC
       end
     end
 
+    ##
+    # Initialize necessary files such as the configuration file.
     def init
       print 'Type the full path for your new repo (ex. ~/works/my_repo): '
       workspace = gets.chomp
@@ -41,6 +45,24 @@ module HDOC
       Committer.init(workspace)
 
       puts 'Here we are! You are ready to start.'
+    end
+
+    ##
+    # Synchronize user's progress with the online repository.
+    def sync
+      config = Configuration.new(@config_file)
+      log_handler = LogBuilder.new(File.join(config.options['workspace'], 'log.yml'))
+
+      sync_repo(log_handler.log.keys.last, config.options)
+    end
+
+    def sync_repo(day, options)
+      return unless options['auto_push']
+
+      committer = Committer.new(options['workspace'])
+      committer.push("Add Day #{day}")
+    rescue Exception => exception
+      puts exception.message
     end
 
     def version
