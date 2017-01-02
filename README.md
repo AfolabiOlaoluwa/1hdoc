@@ -4,6 +4,8 @@
 [![Build Status](https://travis-ci.org/domcorvasce/1hdoc.svg?branch=master)](https://travis-ci.org/domcorvasce/1hdoc)
 
 Keep track of your progress during #100DaysOfCode event.
+## Warning
+It's still in development so you could meet some bugs.
 
 ## Installation
 
