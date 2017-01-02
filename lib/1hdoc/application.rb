@@ -14,6 +14,7 @@ module HDOC
     def initialize(option_parser = OptionParser)
       @option_parser = option_parser
       @config_file = '~/.1hdoc.yml'
+      @log_file = 'log.yml'
     end
 
     ##
@@ -53,7 +54,7 @@ module HDOC
     # Synchronize user's progress with the online repository.
     def sync
       options = Configuration.new(@config_file).options
-      log_handler = LogBuilder.new(File.join(options['workspace'], 'log.yml'))
+      log_handler = LogBuilder.new(File.join(options['workspace'], @log_file))
 
       sync_repo(log_handler.log.keys.last, options)
     end
@@ -62,10 +63,9 @@ module HDOC
     # Track user's progress for the current day.
     def commit
       options = Configuration.new(@config_file).options
-      log_handler = LogBuilder.new(File.join(options['workspace'], 'log.yml'))
+      log_handler = LogBuilder.new(File.join(options['workspace'], @log_file))
 
       return puts 'You are done for today..' unless log_handler.record_not_exist?
-
       latest_day = log_handler.add(register_record)
 
       puts 'Synchronizing with the online repository..'
