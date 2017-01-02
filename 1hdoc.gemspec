@@ -33,6 +33,7 @@ Gem::Specification.new do |gem|
     'lib/1hdoc/committer.rb',
     'lib/1hdoc/log_builder.rb',
     'lib/1hdoc/log_viewer.rb',
+    'lib/1hdoc/integration.rb',
     'lib/1hdoc/application.rb'
   ]
 end
