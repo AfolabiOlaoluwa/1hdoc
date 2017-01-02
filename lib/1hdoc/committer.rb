@@ -20,11 +20,11 @@ module HDOC
     end
 
     def commit(message)
-      @git.commit(message)
+      @repo.commit(message)
     end
 
     def add
-      @git.add(all: true)
+      @repo.add(all: true)
     end
   end
 end
