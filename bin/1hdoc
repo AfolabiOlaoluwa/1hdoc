@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 # coding: utf-8
 
-require '1hdoc'
+require_relative '../lib/1hdoc'
