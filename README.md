@@ -25,6 +25,12 @@ gem install *.gem
 
 ## Getting Started
 
+You can get a list of available commands typing:
+
+```shell
+1hdoc --help
+```
+
 ### Configure the necessary
 
 Here we are! Now you've to initialize all necessary files which are:
@@ -35,7 +41,7 @@ Here we are! Now you've to initialize all necessary files which are:
 Open your Terminal and type:
 
 ```shell
-1hdoc init
+1hdoc --init
 ```
 
 ### Change repo's remote origin
@@ -61,7 +67,7 @@ Have you ended Day 2?
 Great! Let's 1hdoc track your progress. Type:
 
 ```shell
-1hdoc commit
+1hdoc --commit
 ```
 
 By default, 1hdoc will push to the repo automatically after you 
@@ -80,7 +86,7 @@ auto_push: false
 If you turn off `auto_push` you can push to the repo typing:
 
 ```shell
-1hdoc sync
+1hdoc --sync
 ```
 
 ### See progress
@@ -88,8 +94,8 @@ If you turn off `auto_push` you can push to the repo typing:
 Obviously you can see your progress:
 
 ```shell
-1hdoc log
-1hdoc log 2 # only day 2
+1hdoc --log
+1hdoc --log 2 # only day 2
 ```
 
 ## Contribute
