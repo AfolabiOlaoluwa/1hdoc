@@ -15,10 +15,6 @@ describe HDOC::LogBuilder do
       expect(File.read(@log_path)).to include('I love Sass')
     end
 
-    it 'should return false because there is already a record' do
-      expect(@log.add(progress: 'Fixed CSS.')).to eq(false)
-    end
-
     it 'should numbering the days' do
       expect(File.read(@log_path)).to include('1')
       File.delete(@log_path)

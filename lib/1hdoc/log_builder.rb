@@ -14,7 +14,6 @@ module HDOC
     end
 
     def add(data)
-      return false unless record_not_exist?
       day = fetch_current_day
 
       @record[day] = stringify_symbols(data)
@@ -23,8 +22,6 @@ module HDOC
       append_to_log
     end
 
-    private
-
     ##
     # Check if there is no record for the current day.
     def record_not_exist?
@@ -32,8 +29,11 @@ module HDOC
       last_day.nil? || @log[last_day]['published_on'] != @today_date
     end
 
+    private
+
     def append_to_log
       File.open(@path, 'a') { |file| file.puts @record.to_yaml.sub('---', '') }
+      @record.keys.first
     end
 
     def fetch_current_day

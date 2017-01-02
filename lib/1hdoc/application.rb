@@ -11,6 +11,7 @@ module HDOC
 
     def initialize(option_parser = OptionParser)
       @option_parser = option_parser
+      @config_file = '~/.1hdoc.yml'
     end
 
     def run
@@ -36,7 +37,7 @@ module HDOC
       print 'Type the full path for your new repo (ex. ~/works/my_repo): '
       workspace = gets.chomp
 
-      Configuration.init('~/.1hdoc.yml', File.expand_path(workspace))
+      Configuration.init(@config_file, File.expand_path(workspace))
       Committer.init(workspace)
 
       puts 'Here we are! You are ready to start.'
