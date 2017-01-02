@@ -75,7 +75,7 @@ workspace: ~/Workspace/Mine/100-days-of-code
 auto_push: false
 ```
 
-#### Manually push to the repo
+### Manually push to the repo
 
 If you turn off `auto_push` you can push to the repo typing:
 
