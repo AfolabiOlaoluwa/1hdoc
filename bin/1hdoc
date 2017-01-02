@@ -2,3 +2,6 @@
 # coding: utf-8
 
 require_relative '../lib/1hdoc'
+
+app = HDOC::Application.new
+app.run
