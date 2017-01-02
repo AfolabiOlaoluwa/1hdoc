@@ -32,6 +32,16 @@ module HDOC
       end
     end
 
+    def init
+      print 'Type the full path for your new repo (ex. ~/works/my_repo): '
+      workspace = gets.chomp
+
+      Configuration.init('~/.1hdoc.yml', File.expand_path(workspace))
+      Committer.init(workspace)
+
+      puts 'Here we are! You are ready to start.'
+    end
+
     def version
       puts '1hdoc ver0.1.0'
     end
