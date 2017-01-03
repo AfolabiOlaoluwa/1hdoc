@@ -15,7 +15,7 @@ module HDOC
       @option_parser = option_parser
       @config_file = File.expand_path('~/.1hdoc.yml')
 
-      init unless File.exist?(@config_file)
+      return init unless File.exist?(@config_file)
 
       @config_options = Configuration.new(@config_file).options
       @log_path = File.join(@config_options['workspace'], 'log.yml')
