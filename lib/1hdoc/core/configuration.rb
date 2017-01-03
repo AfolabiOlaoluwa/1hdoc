@@ -7,7 +7,7 @@ module HDOC
 
     ##
     # Initialize a new configuration file.
-    def self.init(path, **options)
+    def self.init(path, options)
       options['auto_push'] ||= true
       File.open(File.expand_path(path), 'w') { |file| file.puts(options.to_yaml) }
     end

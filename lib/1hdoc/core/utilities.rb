@@ -5,7 +5,7 @@ module HDOC
     ##
     # Load log from a YAML file.
     def parse_file(path, file_parser)
-      raise Errno::ENOENT, "Unable to find #{@path}" unless File.exist?(path)
+      raise Errno::ENOENT, "Unable to find #{path}" unless File.exist?(path)
       file_parser.load_file(path) || {}
     end
 

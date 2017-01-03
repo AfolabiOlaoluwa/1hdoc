@@ -3,8 +3,6 @@ module HDOC
   # Provides an interface for Git in order to manage user's repo.
   # It's based upon `git` gem.
   class Committer
-    attr_reader :git
-
     ##
     # Initialize the workspace.
     def self.init(path, git = Git)
@@ -19,9 +17,12 @@ module HDOC
       @repo = git.open(path)
     end
 
-    def push(message)
+    def commit(message)
       @repo.add(all: true)
       @repo.commit(message)
+    end
+
+    def push
       @repo.push
     end
   end
