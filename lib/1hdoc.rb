@@ -11,5 +11,6 @@ require_relative '1hdoc/core/log_builder'
 require_relative '1hdoc/core/log_viewer'
 
 # 1hdoc inteface
+require_relative '1hdoc/version'
 require_relative '1hdoc/integration'
 require_relative '1hdoc/application'

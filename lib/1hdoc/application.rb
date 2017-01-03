@@ -39,6 +39,10 @@ module HDOC
         AVAILABLE_COMMANDS.each do |command|
           opts.on(*command) { send(command[1].sub('--', '')) }
         end
+
+        opts.on('-l', '--log [DAY]', 'Show the entire log or per day') do |day|
+          show_log(day)
+        end
       end
     end
 
@@ -56,13 +60,6 @@ module HDOC
     end
 
     ##
-    # Synchronize user's progress with the online repository.
-    def sync
-      log_handler = LogBuilder.new(@log_path)
-      push_commit(@config_options['workspace'])
-    end
-
-    ##
     # Track user's progress for the current day.
     def commit
       log_handler = LogBuilder.new(@log_path)
@@ -76,8 +73,14 @@ module HDOC
       push_commit(@config_options['workspace']) if @config_options['auto_push']
     end
 
+    ##
+    # Manually push the daily commit to user's repository.
+    def sync
+      push_commit(@config_options['workspace'])
+    end
+
     def version
-      puts '1hdoc ver0.1.0'
+      puts '1hdoc ver' + VERSION
     end
   end
 end

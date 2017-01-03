@@ -1,6 +1,8 @@
+require_relative 'lib/1hdoc/version'
+
 Gem::Specification.new do |gem|
   gem.name = '1hdoc'
-  gem.version = File.read('VERSION')
+  gem.version = HDOC::VERSION
   gem.date = Time.now.strftime('%Y-%m-%d')
 
   gem.summary = '#100DaysOfCode CLI tracker'
@@ -26,8 +28,8 @@ Gem::Specification.new do |gem|
 
   gem.executables << '1hdoc'
   gem.files = [
-    'VERSION',
     'lib/1hdoc.rb',
+    'lib/1hdoc/version.rb',
     'lib/1hdoc/core/utilities.rb',
     'lib/1hdoc/core/configuration.rb',
     'lib/1hdoc/core/committer.rb',
