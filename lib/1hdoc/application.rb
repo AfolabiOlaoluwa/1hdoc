@@ -14,7 +14,9 @@ module HDOC
     def initialize(option_parser = OptionParser)
       @option_parser = option_parser
       @config_file = '~/.1hdoc.yml'
-      @log_file = 'log.yml'
+
+      @config_options = Configuration.new(@config_file).options
+      @log_path = File.join(@config_options['workspace'], 'log.yml')
     end
 
     ##
@@ -44,7 +46,7 @@ module HDOC
       print 'Type the full path for your new repo (ex. ~/works/my_repo): '
       workspace = gets.chomp
 
-      Configuration.init(@config_file, File.expand_path(workspace))
+      Configuration.init(@config_file, workspace: File.expand_path(workspace))
       Committer.init(workspace)
 
       puts 'Here we are! You are ready to start.'
@@ -53,23 +55,22 @@ module HDOC
     ##
     # Synchronize user's progress with the online repository.
     def sync
-      options = Configuration.new(@config_file).options
-      log_handler = LogBuilder.new(File.join(options['workspace'], @log_file))
-
-      sync_repo(log_handler.log.keys.last, options)
+      log_handler = LogBuilder.new(@log_path)
+      sync_repo(log_handler.log.keys.last, @config_options['workspace'])
     end
 
     ##
     # Track user's progress for the current day.
     def commit
-      options = Configuration.new(@config_file).options
-      log_handler = LogBuilder.new(File.join(options['workspace'], @log_file))
+      log_handler = LogBuilder.new(@log_path)
 
-      return puts 'You are done for today..' unless log_handler.record_not_exist?
+      return puts 'You are done for today :)' unless log_handler.record_not_exist?
       latest_day = log_handler.add(register_record)
 
-      puts 'Synchronizing with the online repository..'
-      sync_repo(latest_day, options) if options['auto_push']
+      if @config_options['auto_push']
+        puts 'Synchronizing with the online repository..'
+        sync_repo(latest_day, @config_options['workspace'])
+      end
     end
 
     def version

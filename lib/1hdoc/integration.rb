@@ -2,10 +2,8 @@ module HDOC
   ##
   # Provides methods used across various commands.
   module Integration
-    def sync_repo(day, options)
-      return unless options['auto_push']
-
-      committer = Committer.new(options['workspace'])
+    def sync_repo(day, workspace)
+      committer = Committer.new(workspace)
       committer.push("Add Day #{day}")
     rescue Exception => exception
       puts exception.message

@@ -5,8 +5,8 @@ module HDOC
     include Utilities
 
     def initialize(path, file_parser = YAML)
-      @path = File.expand_path(path, File.dirname($PROGRAM_NAME))
-      @log = retrieve_log(@path, file_parser)
+      @path = expand_path(path)
+      @log = parse_file(@path, file_parser)
     end
 
     ##
