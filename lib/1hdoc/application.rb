@@ -46,7 +46,8 @@ module HDOC
       print 'Type the full path for your new repo (ex. ~/works/my_repo): '
       workspace = gets.chomp
 
-      Configuration.init(@config_file, workspace: File.expand_path(workspace))
+      Configuration.init(@config_file, workspace: File.expand_path(workspace),
+                                       auto_push: true)
       Committer.init(workspace)
 
       puts 'Here we are! You are ready to start.'

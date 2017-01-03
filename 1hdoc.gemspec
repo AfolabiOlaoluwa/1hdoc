@@ -28,11 +28,11 @@ Gem::Specification.new do |gem|
   gem.files = [
     'VERSION',
     'lib/1hdoc.rb',
-    'lib/1hdoc/utilities.rb',
-    'lib/1hdoc/configuration.rb',
-    'lib/1hdoc/committer.rb',
-    'lib/1hdoc/log_builder.rb',
-    'lib/1hdoc/log_viewer.rb',
+    'lib/1hdoc/core/utilities.rb',
+    'lib/1hdoc/core/configuration.rb',
+    'lib/1hdoc/core/committer.rb',
+    'lib/1hdoc/core/log_builder.rb',
+    'lib/1hdoc/core/log_viewer.rb',
     'lib/1hdoc/integration.rb',
     'lib/1hdoc/application.rb'
   ]

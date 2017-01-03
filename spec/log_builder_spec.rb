@@ -1,5 +1,5 @@
 require_relative 'spec_helper'
-require_relative '../lib/1hdoc/log_builder'
+require_relative '../lib/1hdoc/core/log_builder'
 
 describe HDOC::LogBuilder do
   File.write(expand_path('./fixtures/log_example_2.yaml'), '')

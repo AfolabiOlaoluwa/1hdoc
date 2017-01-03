@@ -1,5 +1,5 @@
 require_relative 'spec_helper'
-require_relative '../lib/1hdoc/log_viewer'
+require_relative '../lib/1hdoc/core/log_viewer'
 
 describe HDOC::LogViewer do
   subject { described_class.new('./fixtures/log_example.yaml') }

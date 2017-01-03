@@ -1,5 +1,5 @@
 require_relative 'spec_helper'
-require_relative '../lib/1hdoc/configuration'
+require_relative '../lib/1hdoc/core/configuration'
 
 describe HDOC::Configuration do
   before do

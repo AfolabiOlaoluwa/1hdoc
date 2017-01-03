@@ -1,7 +1,7 @@
 require 'git'
 require_relative 'spec_helper'
-require_relative '../lib/1hdoc/configuration'
-require_relative '../lib/1hdoc/committer'
+require_relative '../lib/1hdoc/core/configuration'
+require_relative '../lib/1hdoc/core/committer'
 
 describe HDOC::Committer do
   context ' during initialization' do
