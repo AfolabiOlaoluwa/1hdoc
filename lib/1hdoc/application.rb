@@ -70,7 +70,7 @@ module HDOC
       latest_day = log_handler.add(register_daily_commit)
       committer.commit("Add Day #{latest_day}")
 
-      push_commit(@config_options['workspace']) if @config_options['auto_push']
+      sync if @config_options['auto_push']
     end
 
     ##
